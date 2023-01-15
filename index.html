@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>AuthorApp</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type="text/css">
+        body{
+  display: grid;
+  background: gray;
+  margin: 0;
+}
+
+.hide{
+display: none;
+}
+
+.show{
+display: block;
+}
+
+.main{
+  background-color: #ffffff;
+  text-align: center;
+  margin-left: 160px;
+}
+
+.uname{
+  display: inline-block;
+}
+
+.psw{
+  padding-top: 10px;
+  padding-left: 5px;
+}
+
+.btn{
+  padding-top: 10px;
+}
+
+h1{
+  color: aquamarine;
+}
+
+.footer {
+  z-index: 0;
+  height: fit-content;
+  width: 100%; 
+  position: fixed;
+  bottom: 0pt;
+  left: 0pt;
+  background-color: #333;
+}
+
+.footer p{
+  color: #ffffff;
+  padding-left: 170px;
+}
+/* Style the top navigation bar */
+.topnav {
+  z-index: 1;
+  overflow: hidden;
+  background-color: #333;
+  height: fit-content;
+  padding-left: 160px;
+}
+
+/* Style the topnav links */
+.topnav a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+
+}
+
+/* Change color on hover */
+.topnav a:hover {
+  background-color: lightskyblue;
+  color: black;
+}
+
+.sidebar {
+  height: 100%; /* Full-height: remove this if you want "auto" height */
+  width: 160px; /* Set the width of the sidebar */
+  position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+  top: 0; /* Stay at the top */
+  left: 0;
+  background-color: lightgrey;
+  overflow-x: hidden; /* Disable horizontal scroll */
+  padding-top: 100px;
+  overflow-y: hidden; /* Disable vertical scroll */
+}
+
+.sidebar a {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #000000;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: lightskyblue;
+}
+
+.Vspace{
+  height: 100px;
+}
+
+@media screen and (max-width: 768px) {
+  .sidebar {
+      padding-top: 120px;
+      width: 140px;
+  }
+  .sidebar a {
+      font-size: 18px;
+  }
+
+  .topnav {
+      padding-left: 140px;
+      z-index: 0;
+    }
+  
+    .main{
+      margin-left: 140px;
+    }
+    .footer{
+      z-index: 0;
+    }
+}
+    </style>
+  </head>
+  <body>
+    <script type="text/javascript">
+      function isLoggedin(){
+        var isLoggedin = localStorage.getItem('loggedin');
+        if (isLoggedin == 'true') {
+          document.getElementById("logout").className = "show";
+        }
+      }
+      window.onload = isLoggedin;
+    </script>
+    <div class="topnav">
+        <a href="javascript:void(0)" onclick="hide('bio')">Βιογραφία</a>
+        <a href="javascript:void(0)"  onclick="hide('photos')">Φωτογραφίες</a>
+        <a href="javascript:void(0)"  onclick="hide('erga')">Έργα</a>
+        <a href="javascript:void(0)"  onclick="hide('links')">Σύνδεσμοι</a>
+        <a href="javascript:void(0)"  onclick="hide('manage')">Διαχείριση</a>
+    </div>
+    <div class="main">
+        <div id="table-data">
+
+        </div>
+        <div class="table-data" id="biographyTable">
+
+        </div>
+        <div id="loginForm" class="hide">
+          <form onsubmit="return false">
+            <div>
+              <label for="username">Username:</label>
+              <input type="username" id="username" placeholder="Enter your username" name="username">
+          </div>
+          <div>
+            <label for="pwd">Password:</label>
+            <input type="password" id="pwd" placeholder="Enter password" name="pswd">
+          </div>
+          <div>
+            <button type="button" id="login-form-submit" onclick="getLoginInfo()">Log in</button>
+          </div>
+          </form>
+        </div>
+    </div>
+    <div class="Vspace">
+        <p>Main</p>
+    </div>
+    <div class="sidebar">
+        <div id="bio" class="hide">
+            <a href="javascript:void(0)"  >Bio Category 1</a>
+            <a href="javascript:void(0)"  >Category 2</a>
+            <a href="javascript:void(0)"  >Category 3</a>
+            <a href="javascript:void(0)"  >Category 4</a>
+            <a href="javascript:void(0)"  >Category 5</a>
+            <a href="javascript:void(0)"  >Category 6</a>
+        </div>
+        <div id="photos" class="hide">
+            <a href="javascript:void(0)"  >Photos Category 1</a>
+            <a href="javascript:void(0)"  >Category 2</a>
+            <a href="javascript:void(0)"  >Category 3</a>
+            <a href="javascript:void(0)"  >Category 4</a>
+            <a href="javascript:void(0)"  >Category 5</a>
+            <a href="javascript:void(0)"  >Category 6</a>
+        </div>
+        <div id="erga" class="hide">
+            <a href="javascript:void(0)"  >Works Category 1</a>
+            <a href="javascript:void(0)"  >Category 2</a>
+            <a href="javascript:void(0)"  >Category 3</a>
+            <a href="javascript:void(0)"  >Category 4</a>
+            <a href="javascript:void(0)"  >Category 5</a>
+            <a href="javascript:void(0)"  >Category 6</a>
+        </div>
+        <div id="links" class="hide">
+            <a href="javascript:void(0)"  >Links Category 1</a>
+            <a href="javascript:void(0)"  >Category 2</a>
+            <a href="javascript:void(0)"  >Category 3</a>
+            <a href="javascript:void(0)"  >Category 4</a>
+            <a href="javascript:void(0)"  >Category 5</a>
+            <a href="javascript:void(0)"  >Category 6</a>
+        </div>
+        <div id="manage" class="hide">
+            <a href="javascript:void(0)" onclick="hide('login')">Sign in</a>
+            <div id="logout" class="hide">
+              <a href="javascript:void(0)" onclick="logout()" >Sign out</a>
+            </div>
+        </div>
+
+    </div>
+    <div class="footer">
+        <div>
+        <p>Εργασία στο μάθημα Τεχνολογίες WWW, Τμήμα Πληροφορικής & Τηλεπικοινωνιών</p>
+        </div>
+    </div>
+</body>
+</html>
+
+<script>
+    function getJSONData(){
+        fetch("/authors", {method: "GET"})
+        .then((res) => res.json())
+        .then((json) => showJSONData((json)))
+        .catch((err) => console.error("error:", err));
+    }
+
+    getJSONData();
+    function showJSONData(entries) {
+        console.log(entries);
+        let anHTML = '<table><tr><th>ID</th><th>Title</th><th>URL</th></tr>'
+        for (let entry of entries){
+            anHTML += "<tr><td>" + entry.id + "</td><td>" + entry.books + "</td><td>" + entry.links + "</td></tr>";
+        }
+        anHTML += "</table>";
+        document.getElementById("table-data").innerHTML = anHTML;
+    }
+
+    function hide(x){
+    switch(x){
+        case "bio":
+            document.getElementById("bio").className = "show";
+            document.getElementById("photos").className = "hide";
+            document.getElementById("erga").className = "hide";
+            document.getElementById("links").className = "hide";
+            document.getElementById("manage").className = "hide";
+            document.getElementById("table-data").className = "hide";
+            document.getElementById("loginForm").className = "hide";
+            document.getElementById("biographyTable").className = "show";
+            break;
+        case "photos":
+            document.getElementById("bio").className = "hide";
+            document.getElementById("photos").className = "show";
+            document.getElementById("erga").className = "hide";
+            document.getElementById("links").className = "hide";
+            document.getElementById("manage").className = "hide";
+            document.getElementById("table-data").className = "show";
+            document.getElementById("loginForm").className = "hide";
+            document.getElementById("biographyTable").className = "hide";
+            break;
+        case "erga":
+            document.getElementById("bio").className = "hide";
+            document.getElementById("photos").className = "hide";
+            document.getElementById("erga").className = "show";
+            document.getElementById("links").className = "hide";
+            document.getElementById("manage").className = "hide";
+            document.getElementById("table-data").className = "hide";
+            document.getElementById("loginForm").className = "hide";
+            document.getElementById("biographyTable").className = "hide";
+            break;
+        case "links":
+            document.getElementById("bio").className = "hide";
+            document.getElementById("photos").className = "hide";
+            document.getElementById("erga").className = "hide";
+            document.getElementById("links").className = "show";
+            document.getElementById("manage").className = "hide";
+            document.getElementById("table-data").className = "hide";
+            document.getElementById("loginForm").className = "hide";
+            document.getElementById("biographyTable").className = "hide";
+            break;
+        case "manage":
+            document.getElementById("bio").className = "hide";
+            document.getElementById("photos").className = "hide";
+            document.getElementById("erga").className = "hide";
+            document.getElementById("links").className = "hide";
+            document.getElementById("manage").className = "show";
+            document.getElementById("table-data").className = "hide";
+            document.getElementById("loginForm").className = "hide";
+            document.getElementById("biographyTable").className = "hide";
+            break;
+        case "login":
+            document.getElementById("bio").className = "hide";
+            document.getElementById("photos").className = "hide";
+            document.getElementById("erga").className = "hide";
+            document.getElementById("links").className = "hide";
+            document.getElementById("manage").className = "show";
+            document.getElementById("table-data").className = "hide";
+            document.getElementById("loginForm").className = "show";
+            document.getElementById("biographyTable").className = "hide";
+            break;
+    }
+}
+
+    function getLoginInfo(){
+    localStorage.setItem('loggedin','false');
+    const loginForm = document.getElementById("loginForm");
+    const loginButton = document.getElementById("login-form-submit");
+    const username = document.getElementById("username").value;
+    const password = document.getElementById("pwd").value;
+    console.log(localStorage.getItem('loggedin'));
+    if (username === "user" && password === "web_dev") {
+        alert("You have successfully logged in.");
+        localStorage.setItem('loggedin','true');
+        location.reload();
+    } else {
+        alert("Wrong username or password");
+    }
+    console.log(localStorage.getItem('loggedin'));
+}
+
+    function logout(){
+    localStorage.setItem('loggedin','false');
+    location.reload();
+}
+</script>
